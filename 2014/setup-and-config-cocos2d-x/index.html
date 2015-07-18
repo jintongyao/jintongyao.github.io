@@ -1,0 +1,598 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+  <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.3"/>
+
+
+    <meta name="description" content="Just for fun." />
+
+
+
+  <meta name="keywords" content="Cocos2d-x,Thinking In Cocos2d-x," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.3" />
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    analytics: {
+      google: ''
+    },
+    sidebar: 'post'
+  };
+</script>
+
+
+
+
+  <title> [Thinking In Cocos2d-x]安装和配置Cocos2d-x // JinTongYao's blog </title>
+</head>
+
+<body>
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">JinTongYao's blog</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<div class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/">
+            <i class="menu-item-icon icon-home"></i> <br />
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            標籤
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+</div>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              [Thinking In Cocos2d-x]安装和配置Cocos2d-x
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於 8月 9 2014
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分類於
+            
+              <a href="/categories/Cocos2d-x/">Cocos2d-x</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <h2 id="cocos2d-x的下载">cocos2d-x的下载</h2><hr>
+<p>可以在 <strong><a href="http://cocos2d-x.org/" target="_blank" rel="external">cocos2d-x官方网站</a> </strong>的<strong> <a href="http://cocos2d-x.org/download" target="_blank" rel="external">Download</a></strong> 下载到最新的cocos2d-x库。</p>
+<h3 id="cocos2d-x的基本安装配置">cocos2d-x的基本安装配置</h3><ul>
+<li>解压下载后的程序到个人喜欢的目录。</li>
+<li>在终端中使用命令行进入解压后的<strong>cocos2d-x-xx</strong>目录(xx指的版本号)。</li>
+<li>执行<strong>setup.py</strong>程序。 <code>py setup.py</code></li>
+<li>安装过程中，会提示输入<strong>NDK根目录</strong>，<strong>Android根目录</strong>，<strong>Ant目录</strong>。如果开发Android且已经配置好这三个路径，输入即可。如暂不编译为Android程序，可先跳过。(后文再专门讲解Android程序的配置)</li>
+<li>执行完毕后，运行<strong>source</strong>命令使配置生效即可。 <code>source ~/.bashrc</code>(如果使用了zsh，则执行 <code>source ~/.zshrc</code>)</li>
+<li>这样cocos2d-x的基本配置就完成了。</li>
+</ul>
+<hr>
+<h3 id="运行示例程序">运行示例程序</h3><p>cocos2d-x自带了一套完整的 <strong>DEMO程序</strong> ，演示了cocos2d-x各种功能的使用，很有教学价值。可以运行后对比源代码与效果，也可以看一下各种库的标准用法。</p>
+<ul>
+<li>进入 <strong>cocos2d-x目录</strong> 中的 <strong>build</strong> 文件夹。</li>
+<li>双击 <strong>cocos2d_tests.xcodeproj</strong>，就可以在xcode中打开示例项目啦。</li>
+<li>输入 <strong>command+r</strong> ,即可运行示例工程。</li>
+</ul>
+<p><img src="../../img/2014/setup-and-config-cocos2d-x1.png" alt=""></p>
+<p><img src="../../img/2014/setup-and-config-cocos2d-x2.png" alt=""></p>
+<h2 id="创建新工程">创建新工程</h2><hr>
+<p>cocos2d-x的3.x版本之后使用命令行工具来进行新工程的创建。</p>
+<ul>
+<li>在终端中查看是否已正确配置好环境变量。<code>echo $COCOS_CONSOLE_ROOT</code></li>
+<li>在任意目录下运行，<code>cocos new</code>命令来创建新工程。(如没配置好环境变量，则需要进入cocos2d安装目录执行)</li>
+<li>cocos命令的具体参数如下：<ul>
+<li>cocos new [-h] [-p PACKAGE_NAME] <strong>-l {cpp,lua,js}</strong> <strong>[-d DIRECTORY]</strong><pre><code>[-t TEMPLATE_NAME] [--ios-bundleid IOS_BUNDLEID]
+</code></pre>  [—mac-bundleid MAC_BUNDLEID] [—no-native]<br>  <strong>[PROJECT_NAME]</strong></li>
+<li>PROJECT_NAME为工程名称，-p为包名，-l为语言，-d为目录</li>
+</ul>
+</li>
+<li>如果我们需要在/defalut目录创建名为 <strong>MyGame</strong> 的游戏，那么可以使用<code>cocos new MyGame -l cpp -d /default -p com.mygame</code>进行创建。</li>
+<li>创建完成后，我们可以在指定的目录下找到名为 <strong>PROJECT_NAME</strong> 的目录,进入该目录下的 <strong>/proj.ios_mac</strong>,双击运行 <strong>PROJECT_NAME.xcodeproj</strong> 即可。</li>
+</ul>
+<h2 id="生成文档">生成文档</h2><hr>
+<p>如果想查看cocos2d-x的api，我们可以直接在 <strong><a href="http://cocos2d-x.org/" target="_blank" rel="external">cocos2d-x官方网站</a></strong>的<strong><a href="http://cocos2d-x.org/wiki/Reference" target="_blank" rel="external">API Referance</a></strong> 中查看。</p>
+<p>如果希望在本地查看文档，我们需要使用工具生成本地文档。</p>
+<ul>
+<li>我们需要使用 <strong>doxygen</strong> 这个工具。下载可以到<strong><a href="http://www.doxygen.nl/" target="_blank" rel="external">doxygen的官方网站</a></strong>。</li>
+<li>打开后软件后，选择 <strong>File—Open</strong> ，之后选择cocos2d-x目录下的 <strong>/docs/doxygen.config</strong> 打开。</li>
+<li>选择 <strong>Run-Run doxygen</strong> 即可生成我们的离线api啦.生成后的文档在cocos2d-x目录下的 <strong>/docs/html</strong> 中。</li>
+</ul>
+<hr>
+<p>本文由金同尧原创，首发于<a href="http://www.jintongyao.com">JinTongYao’s blog</a>，转载请注明出处。</p>
+
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Cocos2d-x/"> #Cocos2d-x </a>
+          
+            <a href="/tags/Thinking-In-Cocos2d-x/"> #Thinking In Cocos2d-x </a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/build-a-blog-by-wordpress/">Wordpress搭建个人博客详尽指南</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/use-git-and-github/">在Mac上使用Git与Github</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </div>
+  </div>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+
+    
+      <div class="comments" id="comments">
+        
+      </div>
+    
+  </div>
+
+
+        </div>
+
+        
+      </div>
+
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="JinTongYao" />
+          <p class="site-author-name">JinTongYao</p>
+        </div>
+        <p class="site-description motion-element">Just for fun.</p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">分類</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-name">標籤</span>
+              </a>
+          </div>
+
+        </div>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+        
+      </div>
+
+      
+        <div class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#cocos2d-x的下载"><span class="nav-number">1.</span> <span class="nav-text">cocos2d-x的下载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cocos2d-x的基本安装配置"><span class="nav-number">1.1.</span> <span class="nav-text">cocos2d-x的基本安装配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行示例程序"><span class="nav-number">1.2.</span> <span class="nav-text">运行示例程序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建新工程"><span class="nav-number">2.</span> <span class="nav-text">创建新工程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成文档"><span class="nav-number">3.</span> <span class="nav-text">生成文档</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </div>
+      
+
+    </div>
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp; 
+  2015
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">JinTongYao</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.3"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.3"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.3" id="motion.global"></script>
+
+
+
+  <script type="text/javascript" src="/js/search-toggle.js"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.3" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if (isDesktop() && CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    });
+  </script>
+
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+    });
+  </script>
+
+  
+
+  
+  
+  
+
+  
+
+
+
+
+  
+  
+
+
+  <!-- lazyload -->
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+      <script type="text/javascript">
+        jQuery(function() {
+            jQuery("#posts img").lazyload({
+              placeholder:"/images/placeholder.gif",
+                effect:"fadeIn"
+              });
+            });
+    </script>
+</body>
+</html>

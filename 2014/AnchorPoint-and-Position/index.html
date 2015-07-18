@@ -1,0 +1,617 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+  <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.3"/>
+
+
+    <meta name="description" content="Just for fun." />
+
+
+
+  <meta name="keywords" content="Cocos2d-x,Thinking In Cocos2d-x," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.3" />
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    analytics: {
+      google: ''
+    },
+    sidebar: 'post'
+  };
+</script>
+
+
+
+
+  <title> [Thinking In Cocos2d-x]AnchorPoint与Position // JinTongYao's blog </title>
+</head>
+
+<body>
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">JinTongYao's blog</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<div class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/">
+            <i class="menu-item-icon icon-home"></i> <br />
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            標籤
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+</div>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              [Thinking In Cocos2d-x]AnchorPoint与Position
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於 9月 18 2014
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分類於
+            
+              <a href="/categories/Cocos2d-x/">Cocos2d-x</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <blockquote>
+<p>在Cocos2d-x中，定义一个Node元素的位置，一般要设定两个参数：AnchorPoint与Position。那么这两个点的作用分别是什么，他们是如何来确定一个Node元素的位置呢？</p>
+</blockquote>
+<p>当我们想把一个Node元素放置到场景或者层中时，如何定义他的位置？</p>
+<p>由于元素为一个平面，那么可以通过这个面中的<strong>一个点</strong>来决定这个平面的位置。</p>
+<p><strong>那么在设定时，首先要设定以哪个点为基准（AnchorPoint），然后再设定放置这个点（AnchorPoint）的具体坐标（Position）。</strong></p>
+<h2 id="AnchorPoint（锚点）">AnchorPoint（锚点）</h2><hr>
+<p>AnchorPoint被称为锚点，也就是用来确定元素位置的基准点（原点）。简单来理解，假如我们用钉子将一张纸钉在墙上，那么钉子钉入的点就是AnchorPoint。我们在设定一个元素的Position坐标时，实际上是将AnchorPoint放置在相应的坐标上，之后就能确定整个元素的位置了。</p>
+<p>关于锚点，我们需要知道：</p>
+<ul>
+<li>锚点的两个值(x,x)的取值范围均在<strong>0~1</strong>。<strong>因为这两个点不是具体数值，而是一个乘数因子。</strong>如果为(0,0)，则表示元素的左下角；如果为(1,1)，则表示元素的右上角；如果为(0.3,0.8)，则在元素中(宽 * 0.3，高 * 0.8)的位置上。</li>
+<li>Layer的AnchorPoint默认为(0,0)，其他Node的默认值为(0.5,0.5)。</li>
+<li><p>当我尝试将Layer的AnchorPoint尝试设为其他位置时，会发现不起作用。因为Layer的 <strong>ignoreAnchorPointForPosition</strong>属性设为 <strong>true</strong>，这样他的AnchorPoint就将固定为(0,0)，我们需要将<strong>ignoreAnchorPointForPosition</strong>设为 <strong>false</strong>后，再设置Layer的AnchorPoint才能生效。</p>
+<p>  <code>layer-&gt;ignoreAnchorPointForPosition(false);</code></p>
+</li>
+</ul>
+<h2 id="Position（位置）">Position（位置）</h2><hr>
+<p>有了AnchorPoint的概念，Position就不用过多解释了。Position的设定实质是设置AnchorPoint在坐标系中的位置。确定了AnchorPoint与Position，实际上就确定了元素在坐标系中的位置。关于坐标系位置更详细的解析，可参见<a href="">[Cocos2d-x v3.x官方文档修订版]Cocos2d-x 3.x坐标系详解</a>。</p>
+<h2 id="中点计算公式">中点计算公式</h2><hr>
+<p>明白了AnchorPoint与Position的概念，我们就可以推导出任何一个元素（非Layer）的中点(middlePointX,middlePointY)计算公式。</p>
+<p><code>middlePointX = position.x + node.width * (0.5 - anchorPoint.x);</code></p>
+<p><code>middlePointY = position.y + node.height * (0.5 - anchorPoint.y);</code></p>
+<h2 id="Demo">Demo</h2><hr>
+<p>有了上面的结论，我们可以用几个例子来进行演示。</p>
+<p>下面的例子均使用官方的TestDemo中 <strong>Node::Node</strong> 部分的 <strong>Test2</strong> 修改而成，可以在<strong>官方Test工程</strong>中的<code>NodeTest/NodeTest.cpp</code>中找到原代码。</p>
+<h3 id="将元素放置在左下角">将元素放置在左下角</h3><p>将AnchorPoint与Position都设为(0,0)，则元素就在屏幕左下角。</p>
+<pre><code>auto s = Director::getInstance<span class="params">()</span>-&gt;getWinSize<span class="params">()</span>;
+auto sp1 = Sprite::create<span class="params">(s_pathSister1)</span>;
+
+sp1-&gt;setAnchorPoint<span class="params">(Point<span class="params">(<span class="number">0</span>, <span class="number">0</span>)</span>)</span>;
+sp1-&gt;setPosition<span class="params">(Point<span class="params">(<span class="number">0</span>, <span class="number">0</span>)</span>)</span>;
+
+addChild<span class="params">(sp1)</span>;
+</code></pre><p><img src="../../img/2014/anchorpoint-and-position1.png" alt=""></p>
+<h3 id="将元素放置在中间（1）">将元素放置在中间（1）</h3><p>AnchorPoint仍为(0,0)，将Position设为屏幕中点，可以看到元素并不是完全在中点，真正在中点的是<strong>人物的脚</strong>。</p>
+<pre><code>auto s = Director::getInstance<span class="params">()</span>-&gt;getWinSize<span class="params">()</span>;
+auto sp1 = Sprite::create<span class="params">(s_pathSister1)</span>;
+
+sp1-&gt;setAnchorPoint<span class="params">(Point<span class="params">(<span class="number">0</span>, <span class="number">0</span>)</span>)</span>;
+sp1-&gt;setPosition<span class="params">(Point<span class="params">(s.width / <span class="number">2</span>, s.height / <span class="number">2</span>)</span>)</span>;
+
+addChild<span class="params">(sp1)</span>;
+</code></pre><p><img src="../../img/2014/anchorpoint-and-position2.png" alt=""></p>
+<h3 id="将元素放置在中间（2）">将元素放置在中间（2）</h3><p>AnchorPoint设为了元素中点(0.5,0.5)，Position设为屏幕中点，这回是真正的在屏幕的中点了。</p>
+<pre><code>auto s = Director::getInstance<span class="params">()</span>-&gt;getWinSize<span class="params">()</span>;
+auto sp1 = Sprite::create<span class="params">(s_pathSister1)</span>;
+
+sp1-&gt;setAnchorPoint<span class="params">(Point<span class="params">(<span class="number">0.5</span>, <span class="number">0.5</span>)</span>)</span>;
+sp1-&gt;setPosition<span class="params">(Point<span class="params">(s.width / <span class="number">2</span>, s.height / <span class="number">2</span>)</span>)</span>;
+
+addChild<span class="params">(sp1)</span>;
+</code></pre><p><img src="../../img/2014/anchorpoint-and-position3.png" alt=""></p>
+<h3 id="将元素放置在右下角">将元素放置在右下角</h3><p>将AnchorPoint设在Node元素的右下角(1,0)，Position也设为右下角(1,0)，那元素就会出现在屏幕的右下角。</p>
+<pre><code>auto s = Director::getInstance<span class="params">()</span>-&gt;getWinSize<span class="params">()</span>;
+auto sp1 = Sprite::create<span class="params">(s_pathSister1)</span>;
+
+sp1-&gt;setAnchorPoint<span class="params">(Point<span class="params">(<span class="number">1</span>, <span class="number">0</span>)</span>)</span>;
+sp1-&gt;setPosition<span class="params">(Point<span class="params">(s.width, <span class="number">0</span>)</span>)</span>;
+addChild<span class="params">(sp1)</span>;
+</code></pre><p><img src="../../img/2014/anchorpoint-and-position4.png" alt=""></p>
+<hr>
+<p>本文由金同尧原创，首发于<a href="http://www.jintongyao.com">JinTongYao’s blog</a>，转载请注明出处。</p>
+
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Cocos2d-x/"> #Cocos2d-x </a>
+          
+            <a href="/tags/Thinking-In-Cocos2d-x/"> #Thinking In Cocos2d-x </a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/cocos2d-x-scheduler/">[Cocos2d-x官方中文文档v3.x(修订版)]调度器</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/please-drop-your-ie/">程序员，请扔掉你的IE</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </div>
+  </div>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+
+    
+      <div class="comments" id="comments">
+        
+      </div>
+    
+  </div>
+
+
+        </div>
+
+        
+      </div>
+
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="JinTongYao" />
+          <p class="site-author-name">JinTongYao</p>
+        </div>
+        <p class="site-description motion-element">Just for fun.</p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">分類</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-name">標籤</span>
+              </a>
+          </div>
+
+        </div>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+        
+      </div>
+
+      
+        <div class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#AnchorPoint（锚点）"><span class="nav-number">1.</span> <span class="nav-text">AnchorPoint（锚点）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Position（位置）"><span class="nav-number">2.</span> <span class="nav-text">Position（位置）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中点计算公式"><span class="nav-number">3.</span> <span class="nav-text">中点计算公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Demo"><span class="nav-number">4.</span> <span class="nav-text">Demo</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#将元素放置在左下角"><span class="nav-number">4.1.</span> <span class="nav-text">将元素放置在左下角</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将元素放置在中间（1）"><span class="nav-number">4.2.</span> <span class="nav-text">将元素放置在中间（1）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将元素放置在中间（2）"><span class="nav-number">4.3.</span> <span class="nav-text">将元素放置在中间（2）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将元素放置在右下角"><span class="nav-number">4.4.</span> <span class="nav-text">将元素放置在右下角</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </div>
+      
+
+    </div>
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp; 
+  2015
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">JinTongYao</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.3"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.3"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.3" id="motion.global"></script>
+
+
+
+  <script type="text/javascript" src="/js/search-toggle.js"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.3" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if (isDesktop() && CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    });
+  </script>
+
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+    });
+  </script>
+
+  
+
+  
+  
+  
+
+  
+
+
+
+
+  
+  
+
+
+  <!-- lazyload -->
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+      <script type="text/javascript">
+        jQuery(function() {
+            jQuery("#posts img").lazyload({
+              placeholder:"/images/placeholder.gif",
+                effect:"fadeIn"
+              });
+            });
+    </script>
+</body>
+</html>

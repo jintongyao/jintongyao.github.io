@@ -1,0 +1,599 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+  <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.3"/>
+
+
+    <meta name="description" content="Just for fun." />
+
+
+
+  <meta name="keywords" content="Cocos2d-x,Cocos2d-x官方文档," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.3" />
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    analytics: {
+      google: ''
+    },
+    sidebar: 'post'
+  };
+</script>
+
+
+
+
+  <title> [Cocos2d-x官方中文文档v3.x(修订版)]调度器 // JinTongYao's blog </title>
+</head>
+
+<body>
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">JinTongYao's blog</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<div class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/">
+            <i class="menu-item-icon icon-home"></i> <br />
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            標籤
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+</div>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              [Cocos2d-x官方中文文档v3.x(修订版)]调度器
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於 9月 22 2014
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分類於
+            
+              <a href="/categories/Cocos2d-x/">Cocos2d-x</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <h2 id="继承关系">继承关系</h2><p><img src="res/inherent.png" alt="inherent"></p>
+<h2 id="原理介绍">原理介绍</h2><p>Cocos2d-x调度器为游戏提供定时事件和定时调用服务。所有Node对象都知道如何调度和取消调度事件，使用调度器有几个好处：</p>
+<ol>
+<li>每当Node不再可见或已从场景中移除时，调度器会停止。</li>
+<li>Cocos2d-x暂停时，调度器也会停止。当Cocos2d-x重新开始时，调度器也会自动继续启动。</li>
+<li>Cocos2d-x封装了一个供各种不同平台使用的调度器，使用此调度器你不用关心和跟踪你所设定的定时对象的销毁和停止，以及崩溃的风险。</li>
+</ol>
+<h2 id="基础用法">基础用法</h2><p>游戏中我们经常会随时间的变化而做一些逻辑判断，如碰撞检测。为了解决以上问题，我们引入了调度器，这使得游戏能够更好的处理动态事件。Cocos2d-x提供了多种调度机制，在开发中我们通常会用到3种调度器：</p>
+<ol>
+<li>默认调度器:<code>schedulerUpdate()</code></li>
+<li>自定义调度器:<code>schedule(SEL_SCHEDULE selector, float interval, unsigned int repeat, float delay)</code></li>
+<li>单次调度器:<code>scheduleOnce(SEL_SCHEDULE selector, float delay)</code></li>
+</ol>
+<p>以下我们来对这3种调度器做简单的介绍。</p>
+<h3 id="默认调度器(schedulerUpdate)">默认调度器(schedulerUpdate)</h3><p>该调度器是使用Node的刷新事件update方法，该方法在每帧绘制之前都会被调用一次。由于每帧之间时间间隔较短，所以每帧刷新一次已足够完成大部分游戏过程中需要的逻辑判断。</p>
+<p>Cocos2d-x中Node默认是没有启用update事件的，因此你需要重载update方法来执行自己的逻辑代码。</p>
+<p>通过执行schedulerUpdate()调度器每帧执行 update方法，如果需要停止这个调度器，可以使用<code>unschedulerUpdate()</code>方法。</p>
+<p>以下代码用来测试该调度器：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HelloWorldScene.h&#10;&#10;void update(float dt) override;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HelloWorldScene.cpp&#10;&#10;bool HelloWorld::init()&#10;&#123;&#10;&#9;...&#10;&#9;scheduleUpdate();&#10;&#9;return true;&#10;&#125;&#10;&#10;void HelloWorld::update(float dt)&#10;&#123;&#10;    log(&#34;update&#34;);&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>你会看到控制台不停输出如下信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cocos2d: update&#10;cocos2d: update&#10;cocos2d: update&#10;cocos2d: update</span><br></pre></td></tr></table></figure>
+<h3 id="自定义调度器(scheduler)">自定义调度器(scheduler)</h3><p>游戏开发中，在某些情况下我们可能不需要频繁的进行逻辑检测，这样可以提高游戏性能。所以Cocos2d-x还提供了自定义调度器，可以实现以一定的时间间隔连续调用某个函数。</p>
+<p>由于引擎的调度机制，自定义时间间隔必须大于两帧的间隔，否则两帧内的多次调用会被合并成一次调用。所以自定义时间间隔应在0.1秒以上。</p>
+<p>同样，取消该调度器可以用<code>unschedule(SEL_SCHEDULE selector, float delay)</code>。</p>
+<p>以下代码用来测试该调度器：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HelloWorldScene.h&#10;&#10;void updateCustom(float dt);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HelloWorldScene.cpp&#10;&#10;bool HelloWorld::init()&#10;&#123;&#10;&#9;...&#10;&#9;schedule(schedule_selector(HelloWorld::updateCustom), 1.0f, kRepeatForever, 0);&#10;&#9;return true;&#10;&#125;&#10;&#10;void HelloWorld::updateCustom(float dt)&#10;&#123;&#10;    log(&#34;Custom&#34;);&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>在控制台你会看到每隔1秒输出以下信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cocos2d: Custom&#10;cocos2d: Custom&#10;cocos2d: Custom&#10;cocos2d: Custom&#10;cocos2d: Custom</span><br></pre></td></tr></table></figure>
+<p>我们来看下scheduler(SEL_SCHEDULE selector, float interval, unsigned int repeat, float delay)函数里面的参数：</p>
+<ol>
+<li>第一个参数selector即为你要添加的事件函数</li>
+<li>第二个参数interval为事件触发时间间隔</li>
+<li>第三个参数repeat为触发一次事件后还会触发的次数，默认值为kRepeatForever，表示无限触发次数</li>
+<li>第四个参数delay表示第一次触发之前的延时</li>
+</ol>
+<h3 id="单次调度器(schedulerOnce)">单次调度器(schedulerOnce)</h3><p>游戏中某些场合，你只想进行一次逻辑检测，Cocos2d-x同样提供了单次调度器。</p>
+<p>该调度器只会触发一次，用<code>unschedule(SEL_SCHEDULE selector, float delay)</code>来取消该触发器。</p>
+<p>以下代码用来测试该调度器：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HelloWorldScene.h&#10;&#10;void updateOnce(float dt);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HelloWorldScene.cpp&#10;&#10;bool HelloWorld::init()&#10;&#123;&#10;&#9;...&#10;&#9;scheduleOnce(schedule_selector(HelloWorld::updateOnce), 0.1f);&#10;&#9;return true;&#10;&#125;&#10;&#10;void HelloWorld::updateOnce(float dt)&#10;&#123;&#10;    log(&#34;Once&#34;);&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>这次在控制台你只会看到一次输出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cocos2d: Once</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Cocos2d-x/"> #Cocos2d-x </a>
+          
+            <a href="/tags/Cocos2d-x官方文档/"> #Cocos2d-x官方文档 </a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/Lofter/">Lofter</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/AnchorPoint-and-Position/">[Thinking In Cocos2d-x]AnchorPoint与Position</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </div>
+  </div>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+
+    
+      <div class="comments" id="comments">
+        
+      </div>
+    
+  </div>
+
+
+        </div>
+
+        
+      </div>
+
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="JinTongYao" />
+          <p class="site-author-name">JinTongYao</p>
+        </div>
+        <p class="site-description motion-element">Just for fun.</p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">分類</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-name">標籤</span>
+              </a>
+          </div>
+
+        </div>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+        
+      </div>
+
+      
+        <div class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#继承关系"><span class="nav-number">1.</span> <span class="nav-text">继承关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原理介绍"><span class="nav-number">2.</span> <span class="nav-text">原理介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础用法"><span class="nav-number">3.</span> <span class="nav-text">基础用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#默认调度器(schedulerUpdate)"><span class="nav-number">3.1.</span> <span class="nav-text">默认调度器(schedulerUpdate)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义调度器(scheduler)"><span class="nav-number">3.2.</span> <span class="nav-text">自定义调度器(scheduler)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单次调度器(schedulerOnce)"><span class="nav-number">3.3.</span> <span class="nav-text">单次调度器(schedulerOnce)</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </div>
+      
+
+    </div>
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp; 
+  2015
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">JinTongYao</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.3"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.3"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.3" id="motion.global"></script>
+
+
+
+  <script type="text/javascript" src="/js/search-toggle.js"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.3" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if (isDesktop() && CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    });
+  </script>
+
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+    });
+  </script>
+
+  
+
+  
+  
+  
+
+  
+
+
+
+
+  
+  
+
+
+  <!-- lazyload -->
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+      <script type="text/javascript">
+        jQuery(function() {
+            jQuery("#posts img").lazyload({
+              placeholder:"/images/placeholder.gif",
+                effect:"fadeIn"
+              });
+            });
+    </script>
+</body>
+</html>
