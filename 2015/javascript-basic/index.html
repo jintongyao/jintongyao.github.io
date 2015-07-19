@@ -26,7 +26,7 @@
 
 
 
-  <meta name="keywords" content="github,vim,vundle," />
+  <meta name="keywords" content="javascript," />
 
 
 
@@ -49,7 +49,7 @@
 
 
 
-  <title> 使用Vundle + Github实现Vim配置云管理 // tongyao,Jin </title>
+  <title> 我的Javascript语言精粹-基础语法篇 // tongyao,Jin </title>
 </head>
 
 <body>
@@ -160,7 +160,7 @@
           
           
             
-              使用Vundle + Github实现Vim配置云管理
+              我的Javascript语言精粹-基础语法篇
             
           
         </h1>
@@ -168,14 +168,14 @@
 
       <div class="post-meta">
         <span class="post-time">
-          發表於 8月 20 2014
+          發表於 7月 19 2015
         </span>
 
         
           <span class="post-category">
             &nbsp; | &nbsp; 分類於
             
-              <a href="/categories/vim/">vim</a>
+              <a href="/categories/javascript/">javascript</a>
 
               
               
@@ -188,8 +188,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2014/how-to-use-vundle/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2014/how-to-use-vundle/"></span>
+            <a href="/2015/javascript-basic/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/javascript-basic/"></span>
             </a>
           </span>
           
@@ -203,87 +203,11 @@
       
 
       
-        <p>最近<strong>Xcode</strong>的脑残编辑功能已经彻底让我忍不了了。所以我决定重拾Vim，并且把Vim作为今后主要的C++开发工具。</p>
-<p>关于Vim的使用，最近也在写一篇详尽记录Vim使用经验与技巧的文章。只是这个坑实在太大，这几天折腾Vim导致我自己的开发进度也拖了很多，这个坑还是得慢慢填。</p>
-<p>不过最近思如泉涌，而且已经把<strong>Vundle</strong>折腾好了，所以决定还是先写一篇关于<strong>Vundle</strong>的技巧，作为后面大坑的前戏吧。</p>
-<h2 id="关于Vundle">关于Vundle</h2><hr>
-<p>这是<a href="https://github.com/gmarik/Vundle.vim" target="_blank" rel="external">Vundle的主页</a>。</p>
-<p>Vundle是现在使用Vim必备的一个插件管理插件，他可以自动更新、下载、管理所有的Vim插件。有了Vundle，只需要把常用插件写在<strong>.vimrc</strong>文件中，其他的事情都不用管了。不管是下载还是更新还是删除，只需要执行一个命令，就可以自动搞定，省心又省力，懒人与强迫症的最爱。</p>
-<p>正是由于Vundle的出现大大简化了插件配置的过程，加上程序员们最爱的Github，双剑合璧，就能完成一项Vimer梦寐以求的功能：<strong>不管在哪里使用电脑，都能迅速的将自己的最常用Vim配置复制过去，立刻让自己在最熟悉的环境下工作。</strong></p>
-<h2 id="Vundle的安装与配置">Vundle的安装与配置</h2><hr>
-<h3 id="安装">安装</h3><p>直接使用git将Vundle下载到本地（需要先安装<strong>git</strong>，Mac系统自带）</p>
-<p><code>$ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle</code></p>
-<h3 id="启用">启用</h3><p>打开<strong>~/.vimrc</strong>文件，添加如下代码：</p>
-<pre><code>set rtp+=~<span class="regexp">/.vim/bundle</span><span class="regexp">/vundle/</span> 
-call vundle<span class="comment">#rc()</span>
-<span class="constant">Bundle </span><span class="string">'gmarik/vundle'</span> 
-</code></pre><h3 id="插件的配置（安装其他插件）">插件的配置（安装其他插件）</h3><p>使用Vundle安装其他插件非常容易，只需要在<strong>.vimrc</strong>文件中加入诸如 <code>Bundle &#39;plugin name&#39;</code> 的代码，然后运行 <code>:Bundle Install</code> 更新即可。</p>
-<p>注意，Vundle会自动从<a href="http://vim-scripts.org/" target="_blank" rel="external">Vim Scripts</a>和<a href="https://github.com/" target="_blank" rel="external">Github</a>两个网站进行下载。如插件存在<a href="http://vim-scripts.org/" target="_blank" rel="external">Vim Scripts</a>上，配置时直接填写插件名即可，如存在<a href="https://github.com/" target="_blank" rel="external">Github</a>上，需要在前面加上repository的名字。如 <code>&#39;repository name/plugin name&#39;</code>。</p>
-<p>例如，我的配置的插件列表，只需要加入如下代码即可：</p>
-<pre><code>Bundle <span class="string">'The-NERD-tree'</span>                 <span class="string">"目录树显示插件
-</span>Bundle <span class="string">'The-NERD-Commenter'</span>         <span class="string">"快速注释插件
-</span>Bundle <span class="string">'ctrlp.vim'</span>                     <span class="string">"文件查找插件
-</span>Bundle <span class="string">'AutoClose'</span>                     <span class="string">"自动添加匹配的右括号
-</span>Bundle <span class="string">'Valloric/YouCompleteMe'</span>     <span class="string">"目前最好用的自动补全插件
-</span>Bundle <span class="string">'honza/vim-snippets'</span>            <span class="string">"代码片段自动生成插件
-</span>Bundle <span class="string">'Lokaltog/vim-easymotion'</span>    "快速跳转/查找字符插件
-</code></pre><h3 id="常用命令">常用命令</h3><pre><code><span class="attribute">:BundleInstall</span>
-<span class="attribute">:BundleInstall!</span>
-<span class="attribute">:BundleClean</span>
-<span class="attribute">:BundleClean!</span>
-<span class="attribute">:BundleUpdate</span>
-</code></pre><p>以上命令的意思都很容易理解，主要用于修改配置文件后的安装与清理。</p>
-<h2 id="Vundle_+_Github_打造自己的云Vim">Vundle + Github 打造自己的云Vim</h2><hr>
-<p>题文已经说了，我们的最终目的是辛苦配置一番之后，在今后使用时，能够快速同步与部署我们的配置，不用再一遍遍的在不同的机器上配置。</p>
-<p>至繁到至简，我想这也是所有Geek一直追求的目的，看似折腾，实际上却是为了将来的方便与简单，懒人改变世界，哈哈。</p>
-<p>下面就一步步来说明如何完成Vundle + Github的云同步。</p>
-<h3 id="在自己的github上创建相关repository">在自己的github上创建相关repository</h3><p>这一步不过多赘述了，用过github的人都会。不明白的同学可以看我写的<a href="http://www.jintongyao.com/2014/use-git-and-github/">在Mac上使用git与Github</a>。</p>
-<h3 id="配置本地的Vim">配置本地的Vim</h3><p>我们希望将所有的配置文件在一层目录管理起来，而由于默认的 <strong>~/.vimrc</strong> 文件在用户根目录下，不方便用git管理。所以我们想办法使用软连接巧妙地将 <strong>~/.vimrc</strong> 移动到 <strong>~/.vim/</strong>目录下。</p>
-<pre><code><span class="keyword">cd</span> ~/.<span class="keyword">vim</span>
-touch vimrc                        #建立vimrc文件保存<span class="keyword">vim</span>配置文件，在 vimrc文件下编辑自己的配置
-<span class="keyword">ln</span> -<span class="keyword">s</span> ~/.<span class="keyword">vim</span>/vimrc ~/.vimrc        #通过软连接将 ~/.<span class="keyword">vim</span>/ 目录下vimrc文件映射到 ~/.vimrc
-</code></pre><p>由于Vundle已经可以自动下载插件了，所以我们没必要再把本地的插件目录放到github了。所以编写 <strong>.gitignor</strong> 文件禁止上传 <strong>/bundle</strong>目录。 <code>$ touch ~/.vim/.gitignore</code></p>
-<p><strong>.gitignor</strong> 文件的内容如下：</p>
-<pre><code>bundle<span class="comment">/*
-.DS_Store
-*/</span><span class="class">.DS_Store</span>
-*<span class="class">.bak</span>
-*.bk
-</code></pre><h3 id="将本地配置上传至Github">将本地配置上传至Github</h3><p>这一步对于用过Github的人来说也很简单了，直接贴命令。</p>
-<p><code>$ cd ~/.vim</code></p>
-<p><code>$ git add .</code></p>
-<p><code>$ git commit -m&quot;Initial commit&quot;</code></p>
-<p><code>$ git remote add remoteName git@github.com:your-github-id/your-repository-id.git</code></p>
-<p><code>$ git pull remoteName master</code></p>
-<p><code>$ git push remoteName master</code></p>
-<h3 id="编写脚本，实现完全自动化">编写脚本，实现完全自动化</h3><p>完成了上一步之后，实际我们已经完成了通过github来云同步我们配置的目的。但是还不够傻瓜化，我们再写一个shell脚本实现最简单化好啦。 <code>$ touch ~/.vim/init my vim.sh</code></p>
-<p>下面是脚本内容：</p>
-<pre><code><span class="shebang">#!/bin/sh</span>
-<span class="built_in">echo</span> <span class="string">"Install vim configurations..."</span>
-
-<span class="built_in">echo</span> <span class="string">"cd to .vim directory"</span>
-<span class="built_in">cd</span> ~/.vim
-
-<span class="built_in">echo</span> <span class="string">"backup origin vimrc..."</span>
-<span class="keyword">if</span> [ <span class="operator">-f</span> <span class="string">"<span class="variable">$HOME</span>/.vimrc"</span> ]; <span class="keyword">then</span>
-    mv ~/.vimrc ~/.vimrc.`date +%Y%m%d`
-<span class="keyword">fi</span>
-
-<span class="built_in">echo</span> <span class="string">"create new vimrc..."</span>
-ln <span class="operator">-s</span> ~/.vim/vimrc ~/.vimrc
-
-git submodule init
-git submodule update
-
-vi +BundleInstall! +qall
-</code></pre><h3 id="如何使用">如何使用</h3><p>好了，我们已经大功告成！<br>在使用时，只需要两步就能完成我们的自动同步工作。</p>
-<pre><code>git clone http<span class="variable">s:</span>//github.<span class="keyword">com</span>/your-github-id/your-repository-id.git ~/.<span class="keyword">vim</span>
-
-<span class="keyword">cd</span> ~/.<span class="keyword">vim</span>
-
-./init my <span class="keyword">vim</span>.<span class="keyword">sh</span>
-</code></pre><hr>
-<p>本文由金同尧原创，首发于<a href="http://www.jintongyao.com">JinTongYao’s blog</a>，转载请注明出处。</p>
+        <h3 id="变量">变量</h3><hr>
+<h3 id="区块">区块</h3><hr>
+<h3 id="条件语句">条件语句</h3><hr>
+<h3 id="循环">循环</h3><hr>
+<h3 id="数据类型">数据类型</h3><hr>
 
       
     </div>
@@ -292,11 +216,7 @@ vi +BundleInstall! +qall
       
         <div class="post-tags">
           
-            <a href="/tags/github/"> #github </a>
-          
-            <a href="/tags/vim/"> #vim </a>
-          
-            <a href="/tags/vundle/"> #vundle </a>
+            <a href="/tags/javascript/"> #javascript </a>
           
         </div>
       
@@ -305,13 +225,11 @@ vi +BundleInstall! +qall
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2014/how-to-construct-your-own-info-system/">如何构建自己的笔记系统</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2014/build-a-blog-by-wordpress/">Wordpress搭建个人博客详尽指南</a>
+              <a href="/2015/javascript-overview/">我的Javascript语言精粹-Guide</a>
             
           </div>
         </div>
@@ -354,8 +272,8 @@ vi +BundleInstall! +qall
     
       <div class="comments" id="comments">
         
-          <div class="ds-thread" data-thread-key="2014/how-to-use-vundle/"
-               data-title="使用Vundle + Github实现Vim配置云管理" data-url="http://www.jintongyao.com/2014/how-to-use-vundle/">
+          <div class="ds-thread" data-thread-key="2015/javascript-basic/"
+               data-title="我的Javascript语言精粹-基础语法篇" data-url="http://www.jintongyao.com/2015/javascript-basic/">
           </div>
         
       </div>
@@ -468,7 +386,7 @@ vi +BundleInstall! +qall
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于Vundle"><span class="nav-number">1.</span> <span class="nav-text">关于Vundle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vundle的安装与配置"><span class="nav-number">2.</span> <span class="nav-text">Vundle的安装与配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">2.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启用"><span class="nav-number">2.2.</span> <span class="nav-text">启用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插件的配置（安装其他插件）"><span class="nav-number">2.3.</span> <span class="nav-text">插件的配置（安装其他插件）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用命令"><span class="nav-number">2.4.</span> <span class="nav-text">常用命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vundle_+_Github_打造自己的云Vim"><span class="nav-number">3.</span> <span class="nav-text">Vundle + Github 打造自己的云Vim</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在自己的github上创建相关repository"><span class="nav-number">3.1.</span> <span class="nav-text">在自己的github上创建相关repository</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置本地的Vim"><span class="nav-number">3.2.</span> <span class="nav-text">配置本地的Vim</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将本地配置上传至Github"><span class="nav-number">3.3.</span> <span class="nav-text">将本地配置上传至Github</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编写脚本，实现完全自动化"><span class="nav-number">3.4.</span> <span class="nav-text">编写脚本，实现完全自动化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何使用"><span class="nav-number">3.5.</span> <span class="nav-text">如何使用</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#变量"><span class="nav-number">1.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#区块"><span class="nav-number">2.</span> <span class="nav-text">区块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#条件语句"><span class="nav-number">3.</span> <span class="nav-text">条件语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#循环"><span class="nav-number">4.</span> <span class="nav-text">循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据类型"><span class="nav-number">5.</span> <span class="nav-text">数据类型</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
