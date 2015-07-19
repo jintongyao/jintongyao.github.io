@@ -214,8 +214,9 @@
 <span class="literal">a</span> = <span class="number">1</span><span class="comment">;</span>
 </code></pre><p><code>var a;</code> 称为<strong>变量的声明</strong>。如果只是对变量声明，而未赋初始值，则默认的值为 <code>undefined</code>。</p>
 <p><code>a = 1;</code>为对变量的赋值。将数值1<strong>赋值给</strong>变量a。</p>
-<p>在JavaScript中，允许省略var，直接对未声明的变量赋值。也就是说，<code>var a = 1</code> 与 <code>a = 1</code>，这两条语句的在执行时的效果看上去是相同的。</p>
-<p>但是，需要特别注意的是，如果对变量未声明而直接赋值的话（如 <code>a = 1;</code>），此时的变量将定义为<strong>全局变量</strong>（即便语句在函数内部）！此时往往会不知不觉的造成<strong>全局变量污染</strong>。</p>
+<p>在JavaScript中，允许省略var，直接对未声明的变量赋值。也就是说，<code>var a = 1;</code> 与 <code>a = 1;</code>，这两条语句的在执行时的效果看上去是相同的。</p>
+<p>但是，需要特别注意的是，这两种方法并不完全相同。</p>
+<p>如果对变量未声明而直接赋值的话（如 <code>a = 1;</code>），此时的变量将定义为<strong>全局变量</strong>（即便语句在函数内部）！此时往往会不知不觉的造成<strong>全局变量污染</strong>。所以一定要使用关键字 <code>var</code> 对变量先进行声明。</p>
 <blockquote>
 <p>原则1：记得变量要先声明再赋值，不要忘记使用var。</p>
 </blockquote>
