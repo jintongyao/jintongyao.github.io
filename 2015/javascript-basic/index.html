@@ -222,7 +222,8 @@
     <span class="keyword">var</span> a = b = <span class="number">0</span>;
     <span class="comment">// ...</span>
 }
-</code></pre><p>这段代码，声明了一个 <code>局部变量a</code> 与一个 <code>全局变量b</code>。原因是这里的计算顺序是从右至左的。首先计算表达式 <code>b=0</code>，这里的b是未声明的。然后通过var创建了 <code>局部变量a</code>，并赋值为0。等价于：</p>
+</code></pre><p>这段代码，声明了一个 <code>局部变量a</code> 与一个 <code>全局变量b</code>。</p>
+<p>原因是这里的计算顺序是从右至左的。首先计算表达式 <code>b=0</code>，这里的b是未声明的。然后通过var创建了 <code>局部变量a</code>，并赋值为0。等价于：</p>
 <pre><code><span class="variable"><span class="keyword">var</span> a</span> = (b = <span class="number">0</span>);
 </code></pre><blockquote>
 <p>原则1：变量要先声明再赋值，不要忘记使用var。</p>
