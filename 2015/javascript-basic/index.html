@@ -218,7 +218,7 @@
 <p>但是，需要特别注意的是，这两种方法并不完全相同。</p>
 <p>如果对变量未声明而直接赋值的话（如 <code>a = 1;</code>），此时的变量将定义为<strong>全局变量</strong>（即便语句在函数内部）！此时往往会不知不觉的造成<strong>全局变量污染</strong>。所以一定要使用关键字 <code>var</code> 对变量先进行声明。</p>
 <blockquote>
-<p>原则1：记得变量要先声明再赋值，不要忘记使用var。</p>
+<p>原则1：变量要先声明再赋值，不要忘记使用var。</p>
 </blockquote>
 <h4 id="变量提升(hoisting)">变量提升(hoisting)</h4><p>变量提升的概念并不难理解，但却很容易被忽略。先看这么一段代码：</p>
 <pre><code><span class="keyword">var</span> myvar = <span class="string">'my value'</span>;  
