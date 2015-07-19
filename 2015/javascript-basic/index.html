@@ -216,7 +216,27 @@
 <blockquote>
 <p>原则1：记得变量要先声明再赋值，不要忘记使用var。</p>
 </blockquote>
-<h4 id="变量提升">变量提升</h4><h3 id="区块">区块</h3><hr>
+<h4 id="变量提升(hoisting)">变量提升(hoisting)</h4><p>变量提升的概念并不难理解，但却很容易被忽略。先看这么一段代码：</p>
+<pre><code><span class="keyword">var</span> myvar = <span class="string">'my value'</span>;  
+(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{  
+    alert(myvar);
+    <span class="keyword">var</span> myvar = <span class="string">'local value'</span>;  
+})();  
+</code></pre><p>在 <code>alert(myvar)</code> 时，结果是什么呢？答案是 <code>undefined</code>。不知道是否和你想的一样。</p>
+<p>在上面的例子中，结果为 <code>undefined</code> 原因，正是因为 <strong>变量提升</strong>这个概念。</p>
+<p>在Javascript中，会自动将变量的声明进行提升。这意味着 <code>var表达式</code> 和 <code>function 声明</code> 都将会被提升到当前作用域的顶部。在上文的例子中，实际的执行顺序，我们可以理解为这样：</p>
+<pre><code><span class="keyword">var</span> myvar = <span class="string">'my value'</span>;  
+(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{  
+    <span class="keyword">var</span> myvar;
+    alert(myvar);
+    myvar = <span class="string">'local value'</span>;  
+})();
+</code></pre><p>所以便不难理解，为什么会输出 <code>undefined</code> ，因为变量的声明已经被<strong>提升</strong>了。</p>
+<p>为了避免这种情况可能带来的问题，我们应该将变量的声明显示的放在作用域最上方。</p>
+<blockquote>
+<p>原则2：在作用域开始时，先声明好所有可能需要使用的变量。</p>
+</blockquote>
+<h3 id="区块">区块</h3><hr>
 <h3 id="条件语句">条件语句</h3><hr>
 <h3 id="循环">循环</h3><hr>
 <h3 id="数据类型">数据类型</h3><hr>
@@ -398,7 +418,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#变量"><span class="nav-number">1.</span> <span class="nav-text">变量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#声明与定义"><span class="nav-number">1.1.</span> <span class="nav-text">声明与定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#变量提升"><span class="nav-number">1.2.</span> <span class="nav-text">变量提升</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#区块"><span class="nav-number">2.</span> <span class="nav-text">区块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#条件语句"><span class="nav-number">3.</span> <span class="nav-text">条件语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#循环"><span class="nav-number">4.</span> <span class="nav-text">循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据类型"><span class="nav-number">5.</span> <span class="nav-text">数据类型</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#变量"><span class="nav-number">1.</span> <span class="nav-text">变量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#声明与定义"><span class="nav-number">1.1.</span> <span class="nav-text">声明与定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#变量提升(hoisting)"><span class="nav-number">1.2.</span> <span class="nav-text">变量提升(hoisting)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#区块"><span class="nav-number">2.</span> <span class="nav-text">区块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#条件语句"><span class="nav-number">3.</span> <span class="nav-text">条件语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#循环"><span class="nav-number">4.</span> <span class="nav-text">循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据类型"><span class="nav-number">5.</span> <span class="nav-text">数据类型</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
