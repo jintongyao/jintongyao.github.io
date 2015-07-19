@@ -208,45 +208,13 @@
 
       
         
-          <h3 id="变量">变量</h3><hr>
-<p>Javascript是一门解释型的动态语言。所谓解释型，区别于C/C++/Java等编译型语言，并不会在运行将源代码编译为类文件，而是在运行时动态解析，边解释边运行。所谓动态，即是在<strong>定义变量时，不用强制定义变量的类型，而是在执行时，动态确定变量的类型</strong>。动态语言的特性，确定了Javascript这门语言<strong>随性</strong>的气质，也是Javascript的灵动飘逸所在。理解Javascript的精髓，首先应该理解Javascript中的变量定义。</p>
-<h4 id="声明与定义">声明与定义</h4><pre><code><span class="variable"><span class="keyword">var</span> a</span> = <span class="number">1</span>;
-</code></pre><p>这是一句最简单的变量定义。而实际上基本等价于做了两个操作：定义变量a，然后将数值1复制给变量a。</p>
-<pre><code>var <span class="literal">a</span><span class="comment">;</span>
-<span class="literal">a</span> = <span class="number">1</span><span class="comment">;</span>
-</code></pre><p><code>var a;</code> 称为<strong>变量的声明</strong>。如果只是对变量声明，而未赋初始值，则默认的值为 <code>undefined</code>。</p>
-<p><code>a = 1;</code>为对变量的赋值。将数值1<strong>赋值给</strong>变量a。</p>
-<p>在JavaScript中，允许省略var，直接对未声明的变量赋值。也就是说，<code>var a = 1</code> 与 <code>a = 1</code>，这两条语句的在执行时的效果看上去是相同的。</p>
-<p>但是，需要特别注意的是，如果对变量未声明而直接赋值的话（如 <code>a = 1;</code>），此时的变量将定义为<strong>全局变量</strong>（即便语句在函数内部）！此时往往会不知不觉的造成<strong>全局变量污染</strong>。</p>
-<blockquote>
-<p>原则1：记得变量要先声明再赋值，不要忘记使用var。</p>
-</blockquote>
-<h4 id="变量提升(hoisting)">变量提升(hoisting)</h4><p>变量提升的概念并不难理解，但却很容易被忽略。先看这么一段代码：</p>
-<pre><code><span class="keyword">var</span> myvar = <span class="string">'my value'</span>;  
-(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{  
-    alert(myvar);
-    <span class="keyword">var</span> myvar = <span class="string">'local value'</span>;  
-})();  
-</code></pre><p>在 <code>alert(myvar)</code> 时，结果是什么呢？答案是 <code>undefined</code>。不知道是否和你想的一样。</p>
-<p>在上面的例子中，结果为 <code>undefined</code> 原因，正是因为 <strong>变量提升</strong>这个概念。</p>
-<p>在Javascript中，会自动将变量的声明进行提升。这意味着 <code>var表达式</code> 和 <code>function 声明</code> 都将会被提升到当前作用域的顶部。在上文的例子中，实际的执行顺序，我们可以理解为这样：</p>
-<pre><code><span class="keyword">var</span> myvar = <span class="string">'my value'</span>;  
-(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{  
-    <span class="keyword">var</span> myvar;
-    alert(myvar);
-    myvar = <span class="string">'local value'</span>;  
-})();
-</code></pre><p>所以便不难理解，为什么会输出 <code>undefined</code> ，因为变量的声明已经被<strong>提升</strong>了。</p>
-<p>为了避免这种情况可能带来的问题，我们应该将变量的声明显示的放在作用域最上方。</p>
-<blockquote>
-<p>原则2：在作用域开始时，先声明好所有可能需要使用的变量。</p>
-</blockquote>
-<h3 id="区块">区块</h3><hr>
-<h3 id="条件语句">条件语句</h3><hr>
-<h3 id="循环">循环</h3><hr>
-<h3 id="数据类型">数据类型</h3><hr>
-
-        
+          介绍Javascript的语言基础部分，包括变量、区块、条件语句、循环、基本数据类型等。
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/javascript-basic/">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+          
       
     </div>
 
