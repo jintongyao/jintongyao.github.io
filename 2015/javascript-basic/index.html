@@ -220,6 +220,10 @@
 <blockquote>
 <p>原则1：变量要先声明再赋值，不要忘记使用var。</p>
 </blockquote>
+<h4 id="动态类型">动态类型</h4><p>Javascript中变量的一大特点，即为动态类型。变量的类型没有限制，可以赋予各种类型的值。</p>
+<pre><code>var <span class="literal">a</span> = <span class="number">1</span><span class="comment">;</span>
+<span class="literal">a</span> = <span class="string">"hello"</span><span class="comment">;</span>
+</code></pre><p>在首次赋值时，变量 <code>a</code> 为数值型，而赋值为 <code>hello</code> 后，则变为字符串型。</p>
 <h4 id="变量提升(hoisting)">变量提升(hoisting)</h4><p>变量提升的概念并不难理解，但却很容易被忽略。先看这么一段代码：</p>
 <pre><code><span class="keyword">var</span> myvar = <span class="string">'my value'</span>;  
 (<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{  
@@ -422,7 +426,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#变量"><span class="nav-number">1.</span> <span class="nav-text">变量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#声明与定义"><span class="nav-number">1.1.</span> <span class="nav-text">声明与定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#变量提升(hoisting)"><span class="nav-number">1.2.</span> <span class="nav-text">变量提升(hoisting)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#区块"><span class="nav-number">2.</span> <span class="nav-text">区块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#条件语句"><span class="nav-number">3.</span> <span class="nav-text">条件语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#循环"><span class="nav-number">4.</span> <span class="nav-text">循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据类型"><span class="nav-number">5.</span> <span class="nav-text">数据类型</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#变量"><span class="nav-number">1.</span> <span class="nav-text">变量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#声明与定义"><span class="nav-number">1.1.</span> <span class="nav-text">声明与定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#动态类型"><span class="nav-number">1.2.</span> <span class="nav-text">动态类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#变量提升(hoisting)"><span class="nav-number">1.3.</span> <span class="nav-text">变量提升(hoisting)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#区块"><span class="nav-number">2.</span> <span class="nav-text">区块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#条件语句"><span class="nav-number">3.</span> <span class="nav-text">条件语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#循环"><span class="nav-number">4.</span> <span class="nav-text">循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据类型"><span class="nav-number">5.</span> <span class="nav-text">数据类型</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
