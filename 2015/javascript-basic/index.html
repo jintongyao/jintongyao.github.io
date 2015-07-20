@@ -271,12 +271,12 @@
 <h3 id="条件语句">条件语句</h3><hr>
 <p>JavaScript提供 <code>if结构</code> 和 <code>switch结构</code>，完成条件判断。</p>
 <h4 id="比较运算符">比较运算符</h4><p>Javascript中，一般有两种运算符。严格运算符 <code>===</code> 与非严格运算符 <code>==</code>。</p>
-<p>使用 <code>===</code> 时，等式两边不会进行隐式转换，而是直接比较，只有等式两边数值与类型完全一样时，才返回true。</p>
+<p>使用 <code>===</code> 时，等式两边不会进行隐式转换，而是直接比较，只有等式两边数值与类型完全一样时，才返回 <code>true</code>。</p>
 <p>使用 <code>==</code> 时，在比较前会将两个被比较的值转换为相同类型，然后再进行比较。</p>
 <pre><code><span class="variable"><span class="keyword">var</span> a</span> = <span class="string">"1"</span>;
 <span class="variable"><span class="keyword">var</span> b</span> = <span class="number">1</span>;
-a == <span class="number">1</span>  <span class="comment">// true</span>
-a === <span class="number">1</span> <span class="comment">// false</span>
+a == b  <span class="comment">// true</span>
+a === b <span class="comment">// false</span>
 </code></pre><h4 id="表达式的值">表达式的值</h4><p>下面这些值将被计算为 <code>false</code> :</p>
 <ul>
 <li>false</li>
