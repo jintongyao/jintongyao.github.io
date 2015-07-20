@@ -206,17 +206,17 @@
         <h3 id="变量">变量</h3><hr>
 <p>Javascript是一门解释型的动态语言。</p>
 <p>所谓解释型，区别于 <code>C/C++/Java</code> 等编译型语言，并不会在运行将源代码编译为类文件，而是在运行时动态解析，边解释边运行。</p>
-<p>所谓动态，即是在<strong>编写代码时时，不用强制声明变量的类型，而是在执行时，动态确定变量的类型</strong>。动态语言的特性，确定了Javascript这门语言<strong>随性</strong>的气质，也是Javascript的灵动飘逸所在。</p>
+<p>所谓动态，即是在 <strong>编写代码时时，不用强制声明变量的类型，而是在执行时，动态确定变量的类型</strong>。动态语言的特性，确定了Javascript这门语言 <strong>随性</strong> 的气质，也是Javascript的灵动飘逸所在。</p>
 <p>理解Javascript的精髓，首先应该理解Javascript中的变量。</p>
 <h4 id="声明与定义">声明与定义</h4><pre><code><span class="variable"><span class="keyword">var</span> a</span> = <span class="number">1</span>;
 </code></pre><p>这是一句最简单的变量定义。而实际上基本等价于做了两个操作：声明变量a，然后将数值1复制给变量a。</p>
 <pre><code>var <span class="literal">a</span><span class="comment">;</span>
 <span class="literal">a</span> = <span class="number">1</span><span class="comment">;</span>
-</code></pre><p><code>var a;</code> 称为<strong>变量的声明</strong>。如果只是对变量声明，而未赋初始值，则默认的值为 <code>undefined</code>。</p>
-<p><code>a = 1;</code>为对变量的赋值。将数值1<strong>赋值给</strong>变量a。</p>
+</code></pre><p><code>var a;</code> 称为 <strong>变量的声明</strong>。如果只是对变量声明，而未赋初始值，则默认的值为 <code>undefined</code>。</p>
+<p><code>a = 1;</code>为对变量的赋值。将数值1 <strong>赋值给</strong> 变量a。</p>
 <p>在JavaScript中，允许省略var，直接对未声明的变量赋值。也就是说，<code>var a = 1;</code> 与 <code>a = 1;</code>，这两条语句的在执行时的效果看上去是相同的。</p>
 <p>但是，需要特别注意的是，这两种方法并不完全相同。</p>
-<p>如果对变量未声明而直接赋值的话（如 <code>a = 1;</code>），此时的变量将定义为<strong>全局变量</strong>（即便语句在函数内部）！此时往往会不知不觉的造成<strong>全局变量污染</strong>。所以一定要使用关键字 <code>var</code> 对变量先进行声明。</p>
+<p>如果对变量未声明而直接赋值的话（如 <code>a = 1;</code>），此时的变量将定义为 <strong>全局变量</strong>（即便语句在函数内部）！此时往往会不知不觉的造成 <strong>全局变量污染</strong>。所以一定要使用关键字 <code>var</code> 对变量先进行声明。</p>
 <p>还有一种写法也会造成类似的问题，如：</p>
 <pre><code><span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">()</span> </span>{
     <span class="keyword">var</span> a = b = <span class="number">0</span>;
@@ -260,7 +260,7 @@
 </blockquote>
 <h3 id="区块(block)">区块(block)</h3><hr>
 <p>JavaScript支持一对花括号创建的代码段，花括号所包裹的部分，就称为 <code>区块</code>。</p>
-<p>与 <code>C</code> 等语言中，区块使用独立的作用域不同的是，在Javascript中，区块可以说是<strong>然而并没有什么卵用</strong>。区块中的变量与区块外的变量，属于同一个作用域。</p>
+<p>与 <code>C</code> 等语言中，区块使用独立的作用域不同的是，在Javascript中，区块可以说是 <strong>然而并没有什么卵用</strong>。区块中的变量与区块外的变量，属于同一个作用域。</p>
 <pre><code>{ 
     <span class="keyword">var</span> a = <span class="number">1</span>;
 }
@@ -286,7 +286,7 @@ a === <span class="number">1</span> <span class="comment">// false</span>
 <li>NaN</li>
 <li>空字符串 (“”)</li>
 </ul>
-<p>当传递给条件语句时，所有其他值，包括所有<strong>对象</strong>会被计算为 <code>true</code>。</p>
+<p>当传递给条件语句时，所有其他值，包括所有 <strong>对象</strong> 会被计算为 <code>true</code>。</p>
 <h4 id="switch结构">switch结构</h4><p>下例为switch的标准代码风格。参考自<a href="https://github.com/jayli/javascript-patterns/blob/master/chapter2.markdown" target="_blank" rel="external">JavaScript模式</a>一书。</p>
 <pre><code><span class="keyword">var</span> inspect_me = <span class="number">0</span>,
 <span class="keyword">var</span> <span class="literal">result</span> = '';
@@ -313,7 +313,7 @@ default:
 <pre><code>for <span class="comment">(var i = 0; i &lt; myArray.length; i++)</span> {
     <span class="comment">// do something with myarray[i]</span>
 }
-</code></pre><p>但是这样的使用方式，在某些情况下可能并不是最佳实践。因为每次进入循环时，都会读取 <code>myArray.length</code> 属性。当 <code>myArray</code> 为一个<strong>HTMLCollection</strong>对象时，如 <code>document.images</code> 、 <code>document.forms</code> 时，每次循环都会先调用dom的查询操作，非常耗费资源。</p>
+</code></pre><p>但是这样的使用方式，在某些情况下可能并不是最佳实践。因为每次进入循环时，都会读取 <code>myArray.length</code> 属性。当 <code>myArray</code> 为一个 <strong>HTMLCollection</strong> 对象时，如 <code>document.images</code> 、 <code>document.forms</code> 时，每次循环都会先调用dom的查询操作，非常耗费资源。</p>
 <p>最佳实践是这种形式：</p>
 <pre><code><span class="keyword">var</span> i = <span class="number">0</span>,
 <span class="keyword">var</span> <span class="built_in">max</span>,
@@ -321,8 +321,8 @@ default:
     <span class="comment">// do something with myarray[i]</span>
 }
 </code></pre><p>使用变量 <code>max</code> 记录 <code>myArray</code>的长度。同时将 <code>i</code> 与 <code>max</code> 都使用 <code>var</code> 单独进行声明。</p>
-<h4 id="for-in循环">for-in循环</h4><p><code>for-in</code> 循环用于对非数组对象作遍历。通过for-in进行循环也被称作“枚举”。</p>
-<p>对对象使用 <code>for-in</code> 循环，可以遍历对象的所有属性，也包括从<strong>原型链上继承</strong>的的属性。如果不想包含从<strong>原型链上继承</strong>的的属性，需要使用 <code>hasOwnProperty</code> 方法。</p>
+<h4 id="for-in循环">for-in循环</h4><p><code>for-in</code> 循环用于对非数组对象作遍历。通过for-in进行循环也被称作 <strong>枚举</strong>。</p>
+<p>对对象使用 <code>for-in</code> 循环，可以遍历对象的所有属性，也包括从 <strong>原型链上继承</strong> 的的属性。如果不想包含从原型链上继承的的属性，需要使用 <code>hasOwnProperty</code> 方法。</p>
 <pre><code><span class="built_in">Object</span>.prototype.bar = <span class="number">1</span>;
 <span class="keyword">var</span> foo = {moo: <span class="number">2</span>};
 
