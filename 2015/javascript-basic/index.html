@@ -322,7 +322,21 @@ default:
 }
 </code></pre><p>使用变量 <code>max</code> 记录 <code>myArray</code>的长度。同时将 <code>i</code> 与 <code>max</code> 都使用 <code>var</code> 单独进行声明。</p>
 <h4 id="for-in循环">for-in循环</h4><p><code>for-in</code> 循环用于对非数组对象作遍历。通过for-in进行循环也被称作“枚举”。</p>
-<h3 id="数据类型">数据类型</h3><hr>
+<p>对对象使用 <code>for-in</code> 循环，可以遍历对象的所有属性，也包括从<strong>原型链上继承</strong>的的属性。如果不想包含从<strong>原型链上继承</strong>的的属性，需要使用 <code>hasOwnProperty</code> 方法。</p>
+<pre><code><span class="built_in">Object</span>.prototype.bar = <span class="number">1</span>;
+<span class="keyword">var</span> foo = {moo: <span class="number">2</span>};
+
+<span class="comment">/* 不使用hasOwnProperty过滤 */</span>
+<span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">in</span> foo) {
+    <span class="built_in">console</span>.log(i); <span class="comment">// 输出两个属性：bar 和 moo</span>
+}
+<span class="comment">/* 使用hasOwnProperty过滤 */</span>
+<span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">in</span> foo) {
+    <span class="keyword">if</span> (foo.hasOwnProperty(i)) {
+        <span class="built_in">console</span>.log(i);<span class="comment">// 只输出属性moo</span>
+    }
+}
+</code></pre><h3 id="数据类型">数据类型</h3><hr>
 <h4 id="null_&amp;&amp;_undefined">null &amp;&amp; undefined</h4><h4 id="数值(number)">数值(number)</h4><h4 id="字符串(string)">字符串(string)</h4><h4 id="布尔值(boolean)">布尔值(boolean)</h4><h4 id="对象(object)">对象(object)</h4><h4 id="数组(array)">数组(array)</h4><h4 id="函数(function)">函数(function)</h4><h4 id="typeof与类型转换">typeof与类型转换</h4><h3 id="参考资料">参考资料</h3><hr>
 <ul>
 <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript" target="_blank" rel="external">MDN的Javascript教程</a></li>
