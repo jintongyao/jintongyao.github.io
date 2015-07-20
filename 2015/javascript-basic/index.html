@@ -207,9 +207,9 @@
 <p>Javascript是一门解释型的动态语言。</p>
 <p>所谓解释型，区别于 <code>C/C++/Java</code> 等编译型语言，并不会在运行将源代码编译为类文件，而是在运行时动态解析，边解释边运行。</p>
 <p>所谓动态，即是在<strong>定义变量时，不用强制定义变量的类型，而是在执行时，动态确定变量的类型</strong>。动态语言的特性，确定了Javascript这门语言<strong>随性</strong>的气质，也是Javascript的灵动飘逸所在。</p>
-<p>理解Javascript的精髓，首先应该理解Javascript中的变量定义。</p>
+<p>理解Javascript的精髓，首先应该理解Javascript中的变量。</p>
 <h4 id="声明与定义">声明与定义</h4><pre><code><span class="variable"><span class="keyword">var</span> a</span> = <span class="number">1</span>;
-</code></pre><p>这是一句最简单的变量定义。而实际上基本等价于做了两个操作：定义变量a，然后将数值1复制给变量a。</p>
+</code></pre><p>这是一句最简单的变量定义。而实际上基本等价于做了两个操作：声明变量a，然后将数值1复制给变量a。</p>
 <pre><code>var <span class="literal">a</span><span class="comment">;</span>
 <span class="literal">a</span> = <span class="number">1</span><span class="comment">;</span>
 </code></pre><p><code>var a;</code> 称为<strong>变量的声明</strong>。如果只是对变量声明，而未赋初始值，则默认的值为 <code>undefined</code>。</p>
@@ -265,7 +265,10 @@
     <span class="keyword">var</span> a = <span class="number">1</span>;
 }
 <span class="built_in">console</span>.log(a); <span class="comment">// 1</span>
-</code></pre><h3 id="条件语句">条件语句</h3><hr>
+</code></pre><blockquote>
+<p>原则3：只在 <code>function</code>、 <code>if</code>、 <code>switch</code>、 <code>while</code>、 <code>for</code>、 <code>do</code>、 <code>try</code>等有意义的代码块中使用花括号。</p>
+</blockquote>
+<h3 id="条件语句">条件语句</h3><hr>
 <p>JavaScript提供 <code>if结构</code> 和 <code>switch结构</code>，完成条件判断。</p>
 <h3 id="循环">循环</h3><hr>
 <h3 id="数据类型">数据类型</h3><hr>
