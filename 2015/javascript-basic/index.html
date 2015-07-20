@@ -233,18 +233,18 @@
 <span class="literal">a</span> = <span class="string">"hello"</span><span class="comment">;</span>
 </code></pre><p>在首次赋值时，变量 <code>a</code> 为数值型，而赋值为 <code>hello</code> 后，则变为字符串型。</p>
 <h4 id="变量提升(hoisting)">变量提升(hoisting)</h4><p>变量提升的概念并不难理解，但却很容易被忽略。先看这么一段代码：</p>
-<pre><code><span class="keyword">var</span> myvar = <span class="string">'my value'</span>;  
-(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{  
-    alert(myvar);
+<pre><code><span class="keyword">var</span> myvar = <span class="string">"my value"</span>;
+(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{  
+    <span class="built_in">console</span>.log(myvar);
     <span class="keyword">var</span> myvar = <span class="string">'local value'</span>;  
 })();  
-</code></pre><p>在 <code>alert(myvar)</code> 时，结果是什么呢？答案是 <code>undefined</code>。不知道是否和你想的一样。</p>
+</code></pre><p>在 <code>console.log(myvar)</code> 时，结果是什么呢？答案是 <code>undefined</code>。不知道是否和你想的一样。</p>
 <p>在上面的例子中，结果为 <code>undefined</code> 原因，正是因为 <strong>变量提升</strong>这个概念。</p>
 <p>在Javascript中，会自动将变量的声明进行提升。这意味着 <code>var表达式</code> 和 <code>function 声明</code> 都将会被提升到当前作用域的顶部。在上文的例子中，实际的执行顺序，我们可以理解为这样：</p>
-<pre><code><span class="keyword">var</span> myvar = <span class="string">'my value'</span>;  
-(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{  
+<pre><code><span class="keyword">var</span> myvar = <span class="string">"my value"</span>;  
+(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{  
     <span class="keyword">var</span> myvar;
-    alert(myvar);
+    <span class="built_in">console</span>.log(myvar);
     myvar = <span class="string">'local value'</span>;  
 })();
 </code></pre><p>所以便不难理解，为什么会输出 <code>undefined</code> ，因为变量的声明已经被<strong>提升</strong>了。</p>
@@ -311,6 +311,7 @@ default:
 <p>Javascript中的循环与其他编程语言没有太大区别。主要有 <code>while</code>、<code>do...while</code>、<code>for</code>循环三种。重点说一下 <code>for循环</code> 的两种形式。</p>
 <h4 id="基本for循环">基本for循环</h4><p>在 <code>基本for循环</code> 中，可以对数组或类似数组的对象作遍历。</p>
 <pre><code>for <span class="comment">(var i = 0; i &lt; myArray.length; i++)</span> {
+
     <span class="comment">// do something with myarray[i]</span>
 }
 </code></pre><p>但是这样的使用方式，在某些情况下可能并不是最佳实践。因为每次进入循环时，都会读取 <code>myArray.length</code> 属性。当 <code>myArray</code> 为一个 <strong>HTMLCollection</strong> 对象时，如 <code>document.images</code> 、 <code>document.forms</code> 时，每次循环都会先调用dom的查询操作，非常耗费资源。</p>
