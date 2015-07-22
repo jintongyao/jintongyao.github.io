@@ -212,7 +212,8 @@
     <span class="string">"sex"</span> : <span class="string">"male"</span>,
     <span class="string">"job"</span> : <span class="string">"programmer"</span>
 };
-</code></pre><p>其中，属性名可以加引号或者不加引号。但如果属性名本身并非合法的标示符名，则需要添加引号。</p>
+</code></pre><p>JavaScript中自定义的对象（用户定义的本地对象）任何时候都是可变的。内置本地对象的属性也是可变的。你也可以先创建一个空对象，然后在需要时给它添加功能。</p>
+<p>对象的属性名可以加引号或者不加引号。但如果属性名本身并非合法的标示符名，则需要添加引号。</p>
 <h4 id="对象的引用">对象的引用</h4><p>Javascript中，对于对象的传递为 <strong>引用传递</strong>。也就是说，不同变量名指向同一个对象，实际指向了相同的内存地址，对其中任何一个对象的修改，都会引起其他对象引用的改变。</p>
 <pre><code><span class="variable"><span class="keyword">var</span> foo</span> = {};
 <span class="variable"><span class="keyword">var</span> bar</span> = foo;
@@ -220,7 +221,19 @@ foo.name = <span class="string">"Tom"</span>;
 console.log(bar.name);<span class="comment">// Tom</span>
 </code></pre><p>需要特别说明的是，与对象相对应的是，原始类型的传递采用 <strong>值复制</strong> 的方式。</p>
 <h3 id="对象属性">对象属性</h3><hr>
-<h4 id="读取属性">读取属性</h4><h4 id="遍历属性(枚举)">遍历属性(枚举)</h4><h4 id="删除属性">删除属性</h4><h3 id="#">#</h3><h3 id="Object对象">Object对象</h3><hr>
+<h4 id="读取/写入属性">读取/写入属性</h4><p>对象的属性，可以通过 <code>.</code>运算符或者 <code>[]</code> 运算符来进行读取。</p>
+<p>这两种方法都可以使用，一般来说使用 <code>.</code> 运算符更加直观。如 <code>var myName = student1.name;</code>。但如果属性的值，是通过变量名进行传递的，则只有在<code>[]</code> 运算符中才可以获得正确的动态值。</p>
+<pre><code><span class="function"><span class="keyword">function</span> <span class="title">readProperty</span><span class="params">(propName)</span> {</span>
+    console.<span class="built_in">log</span><span class="params">(foo[propName])</span>;<span class="comment">// Tom</span>
+    console.<span class="built_in">log</span><span class="params">(foo.propName)</span>;<span class="comment">// undefined</span>
+}
+
+readProperty<span class="params">(name)</span>;
+</code></pre><p>对属性的赋值也是如此，使用以上两种运算符：</p>
+<pre><code><span class="variable"><span class="keyword">var</span> foo</span> = {};
+foo.name = <span class="string">"tom"</span>;
+foo[<span class="string">"sex"</span>] = <span class="string">"male"</span>;
+</code></pre><h4 id="遍历属性(枚举)">遍历属性(枚举)</h4><h4 id="删除属性">删除属性</h4><h3 id="#">#</h3><h3 id="Object对象">Object对象</h3><hr>
 <h3 id="创建对象的思考">创建对象的思考</h3><hr>
 
       
@@ -400,7 +413,7 @@ console.log(bar.name);<span class="comment">// Tom</span>
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#对象"><span class="nav-number">1.</span> <span class="nav-text">对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#对象字面量"><span class="nav-number">1.1.</span> <span class="nav-text">对象字面量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对象的引用"><span class="nav-number">1.2.</span> <span class="nav-text">对象的引用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象属性"><span class="nav-number">2.</span> <span class="nav-text">对象属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#读取属性"><span class="nav-number">2.1.</span> <span class="nav-text">读取属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#遍历属性(枚举)"><span class="nav-number">2.2.</span> <span class="nav-text">遍历属性(枚举)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除属性"><span class="nav-number">2.3.</span> <span class="nav-text">删除属性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="##"><span class="nav-number">3.</span> <span class="nav-text">#</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Object对象"><span class="nav-number">4.</span> <span class="nav-text">Object对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建对象的思考"><span class="nav-number">5.</span> <span class="nav-text">创建对象的思考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#对象"><span class="nav-number">1.</span> <span class="nav-text">对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#对象字面量"><span class="nav-number">1.1.</span> <span class="nav-text">对象字面量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对象的引用"><span class="nav-number">1.2.</span> <span class="nav-text">对象的引用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象属性"><span class="nav-number">2.</span> <span class="nav-text">对象属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#读取/写入属性"><span class="nav-number">2.1.</span> <span class="nav-text">读取/写入属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#遍历属性(枚举)"><span class="nav-number">2.2.</span> <span class="nav-text">遍历属性(枚举)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除属性"><span class="nav-number">2.3.</span> <span class="nav-text">删除属性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="##"><span class="nav-number">3.</span> <span class="nav-text">#</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Object对象"><span class="nav-number">4.</span> <span class="nav-text">Object对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建对象的思考"><span class="nav-number">5.</span> <span class="nav-text">创建对象的思考</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
