@@ -203,7 +203,10 @@
       
 
       
-        <p>使用DigitOcean的最低配VPS。系统选择的为 <code>CentOS</code>。</p>
+        <p>对于码农来说，翻墙是一件必须做而又比较麻烦的事情。在mac下，之前一直使用的是收费的 <code>鱼摆摆</code>，倒是还算方便。</p>
+<p>不过作为一个合格的码农，不折腾一套自己的总是不舒服的。使用自己的VPS主机搭建一套 <code>shadowsocks</code> 才是终极之路嘛。</p>
+<p>具体的VPS购买攻略在这里不详细说了，我选择的是DigitOcean的最便宜的5刀/月的服务，每月的流量是1TB，够用了。大家也可以<a href="">这个链接</a>注册，即可获得10美金，免费使用两个月。</p>
+<p>机房选择的是San Francisco机房。系统选择的为 <code>CentOS</code>。</p>
 <h3 id="安装node">安装node</h3><h4 id="安装gcc">安装gcc</h4><p><code>sudo yum install gcc openssl-devel gcc-c++ compat-gcc-34 compat-gcc-34-c++</code></p>
 <h4 id="下载node安装包">下载node安装包</h4><p><code>wget https://nodejs.org/dist/v0.12.7/node-v0.12.7.tar.gz</code></p>
 <h4 id="编译node">编译node</h4><p><code>tar -xvf node-v0.12.7.tar.gz</code><br><code>cd node-v0.12.7</code><br><code>./configure</code><br><code>sudo make</code><br><code>sudo make install</code></p>
@@ -221,6 +224,8 @@
     “<span class="keyword">method</span>”:”aes-<span class="number">256</span>-cfb”
 }
 </code></pre><p>其中，<code>server</code> 填写主机ip，<code>“server_port”</code>填写想要使用的端口，<code>password</code> 填写使用密码。其他几项使用默认值即可。</p>
+<h3 id="启动shadowsocks">启动shadowsocks</h3><p>可以使用 <code>ssserver -c &#39;配置文件位置&#39;</code> 启动shadowsocks服务。不过由于命令为shell阻塞型，关闭ssh连接后，服务也会断掉，我们使用nohup命令启动。</p>
+<p><code>nohup ssserver -c /usr/lib/node_modules/shadowsocks/config.json &amp;</code></p>
 <h3 id="客户端的设置">客户端的设置</h3><p>客户端的设置比较简单，按照服务端的设置进行相应设置即可。客户端唯一需要注意的就是，需要设为<code>全局模式</code>。</p>
 
       
@@ -398,7 +403,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装node"><span class="nav-number">1.</span> <span class="nav-text">安装node</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装gcc"><span class="nav-number">1.1.</span> <span class="nav-text">安装gcc</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#下载node安装包"><span class="nav-number">1.2.</span> <span class="nav-text">下载node安装包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编译node"><span class="nav-number">1.3.</span> <span class="nav-text">编译node</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置安装shadowsocks"><span class="nav-number">2.</span> <span class="nav-text">配置安装shadowsocks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#客户端的设置"><span class="nav-number">3.</span> <span class="nav-text">客户端的设置</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装node"><span class="nav-number">1.</span> <span class="nav-text">安装node</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装gcc"><span class="nav-number">1.1.</span> <span class="nav-text">安装gcc</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#下载node安装包"><span class="nav-number">1.2.</span> <span class="nav-text">下载node安装包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编译node"><span class="nav-number">1.3.</span> <span class="nav-text">编译node</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置安装shadowsocks"><span class="nav-number">2.</span> <span class="nav-text">配置安装shadowsocks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动shadowsocks"><span class="nav-number">3.</span> <span class="nav-text">启动shadowsocks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#客户端的设置"><span class="nav-number">4.</span> <span class="nav-text">客户端的设置</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
