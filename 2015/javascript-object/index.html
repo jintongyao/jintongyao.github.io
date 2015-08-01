@@ -233,7 +233,14 @@ readProperty<span class="params">(name)</span>;
 <pre><code><span class="variable"><span class="keyword">var</span> foo</span> = {};
 foo.name = <span class="string">"tom"</span>;
 foo[<span class="string">"sex"</span>] = <span class="string">"male"</span>;
-</code></pre><h4 id="遍历属性(枚举)">遍历属性(枚举)</h4><h4 id="删除属性">删除属性</h4><h3 id="Object对象">Object对象</h3><hr>
+</code></pre><h4 id="遍历属性(枚举)">遍历属性(枚举)</h4><p>对对象使用 <code>for-in</code> 循环，可以遍历对象的所有属性，也包括从 <strong>原型链上继承</strong> 的的属性。</p>
+<p>如果不想包含从原型链上继承的的属性，需要使用 <code>hasOwnProperty</code> 方法。</p>
+<p>如果希望过滤函数，可以使用　<code>typeof</code> 运算符。</p>
+<h4 id="删除属性">删除属性</h4><p>使用 <code>delete</code> 运算符可以删除对象的属性，如：</p>
+<pre><code><span class="operator"><span class="keyword">delete</span> foo.name;</span>
+</code></pre><p><code>delete</code> 运算符不会删除原型链中的属性。如果对象中的属性覆盖了原型链中的属性，删除对象属性后，使用原型链的属性。</p>
+<h3 id="Object对象">Object对象</h3><hr>
+<p>在Javascript中，有一个 <code>Object</code> 对象，其他所有对象都继承自此对象。</p>
 <h3 id="创建对象的思考">创建对象的思考</h3><hr>
 
       
